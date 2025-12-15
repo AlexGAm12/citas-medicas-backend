@@ -36,7 +36,6 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
 
-// ✅ Health check para Render (IMPORTANTE: 200)
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
