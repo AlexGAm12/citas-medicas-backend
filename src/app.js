@@ -16,7 +16,7 @@ const app = express();
 app.set("trust proxy", 1);
 
 const allowedOrigins = [
-  process.env.FRONTEND_URL,  
+  process.env.FRONTEND_URL,
 ].filter(Boolean);
 
 app.use(
@@ -35,6 +35,11 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
+
+// ✅ Health check para Render (IMPORTANTE: 200)
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
 
 app.get("/", (req, res) => {
   res.json({ message: "API Citas Médicas funcionando" });
